@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+body{
+    background-color: #EEEEEE;
+    font-family: 'Roboto', sans-serif;
+}
+.box-topo{
+    background-color: #CF2B2B;
+    height: 92px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.logo{
+    font-family: 'Righteous', cursive;
+}
+.box-pedir{
+    position: fixed;
+    bottom: 0;
+    height: 92px;
+    width: 100%;
+    background-color: #fff;
+}
