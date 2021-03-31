@@ -46,7 +46,7 @@ body{
 .opcoes::-webkit-scrollbar {
     display: none;
 }
-.margin-right-workaraound{
+.fix-opcoes-margin-right{
     width: 3px;
     flex-shrink: 0;
 }
@@ -103,6 +103,21 @@ body{
     bottom: 0;
     height: 92px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #fff;
     box-shadow: 0px -4px 4px rgba(0,0,0,.10);
+}
+button{
+    border-radius: 50px;
+    border: none;
+    width: 100%;
+}
+.pedir-desativado{
+    font-size: 20px;
+    margin: 0px 25px;
+    height: 61px;
+    background: #CBCBCB;
+    color: #FFFFFF;
 }
