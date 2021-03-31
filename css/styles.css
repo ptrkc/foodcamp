@@ -27,7 +27,7 @@ body{
     margin: 123px 0px 108px 0px;
 }
 .box-conteudo > *{
-    margin: 0px 19px;
+    margin-left:  19px;
 }
 .categoria{
     font-family: 'Righteous', cursive;
@@ -62,12 +62,24 @@ body{
     margin-right: 16px;
     position: relative;
 }
-.opcao img{
+.box-img{
     width: 144px;
     height: 87px;
-    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 4px;
     margin-bottom: 8px;
+    overflow: hidden;
+}
+.box-img img{
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+.bebida img{
+    height: 100%;
+    width: auto;
 }
 .item{
     font-weight: bold;
