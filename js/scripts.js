@@ -5,7 +5,6 @@ const sobremesaSelecionada = {};
 function selecionarOpcao(event) {
 
     console.clear() //debug
-
     const elementoSelecionado = event.currentTarget;
     const idPai = elementoSelecionado.parentNode.id
     const itemSelecionado = elementoSelecionado.querySelector(".item").innerHTML
@@ -21,11 +20,15 @@ function selecionarOpcao(event) {
         sobremesaSelecionada.preco = precoSelecionado
     }
 
-    console.log(pratoSelecionado)
-    console.log(bebidaSelecionada)
-    console.log(sobremesaSelecionada)
-
-
+    elementoSelecionado.classList.add("selecionado");
+    elementoSelecionado.querySelector(".check").classList.remove("escondido");
+    const outrasOpcoes = document.getElementById(idPai).querySelectorAll(".opcao");
+    for (let i = 0; i < outrasOpcoes.length; i++) {
+        if (outrasOpcoes[i] !== elementoSelecionado) {
+            outrasOpcoes[i].classList.remove("selecionado");
+            outrasOpcoes[i].querySelector(".check").classList.add("escondido");
+        }
+    }
 }
 
 // lista com todas as opções clicáveis
