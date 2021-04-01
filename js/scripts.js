@@ -1,12 +1,30 @@
+const pratoSelecionado = {};
+const bebidaSelecionada = {};
+const sobremesaSelecionada = {};
+
 function selecionarOpcao(event) {
 
     console.clear() //debug
 
     const elementoSelecionado = event.currentTarget;
-    const pai = elementoSelecionado.parentNode.id
+    const idPai = elementoSelecionado.parentNode.id
+    const itemSelecionado = elementoSelecionado.querySelector(".item").innerHTML
+    const precoSelecionado = elementoSelecionado.querySelector(".preco").innerHTML
+    if (idPai === "selecao-prato") {
+        pratoSelecionado.prato = itemSelecionado
+        pratoSelecionado.preco = precoSelecionado
+    } else if (idPai === "selecao-bebida") {
+        bebidaSelecionada.prato = itemSelecionado
+        bebidaSelecionada.preco = precoSelecionado
+    } else {
+        sobremesaSelecionada.prato = itemSelecionado
+        sobremesaSelecionada.preco = precoSelecionado
+    }
 
-    console.log(elementoSelecionado)
-    console.log(pai)
+    console.log(pratoSelecionado)
+    console.log(bebidaSelecionada)
+    console.log(sobremesaSelecionada)
+
 
 }
 
