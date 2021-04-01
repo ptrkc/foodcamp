@@ -62,6 +62,7 @@ body{
     padding: 18px 14px 0px;
     margin-right: 16px;
     position: relative;
+    cursor: pointer;
 }
 .box-img{
     width: 144px;
@@ -135,4 +136,9 @@ button{
     height: 61px;
     background: #CBCBCB;
     color: #FFFFFF;
+}
+@media (min-width: 520px) {
+    .box-pedir br{
+        display: none;
+    }
 }
