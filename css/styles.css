@@ -24,7 +24,8 @@ body{
     letter-spacing: -0.6px;
 }
 .box-conteudo{
-    margin: 123px 0px 108px 0px;
+    max-width: 950px;
+    margin: 123px auto 108px auto;
 }
 .box-conteudo > *{
     margin-left:  19px;
