@@ -1,24 +1,29 @@
-const pratoSelecionado = {};
-const bebidaSelecionada = {};
-const sobremesaSelecionada = {};
+const pedido = { prato: {}, bebida: {}, sobremesa: {}, endereco: "", calcularTotal: function () { return (this.prato.preco + this.bebida.preco + this.sobremesa.preco).toFixed(2) } };
 
 function selecionarOpcao(event) {
 
     console.clear() //debug
+
     const elementoSelecionado = event.currentTarget;
     const idPai = elementoSelecionado.parentNode.id
     const itemSelecionado = elementoSelecionado.querySelector(".item").innerHTML
-    const precoSelecionado = elementoSelecionado.querySelector(".preco").innerHTML
+    let precoSelecionado = elementoSelecionado.querySelector(".preco").innerHTML
+    precoSelecionado = parseFloat(precoSelecionado.slice(3).replace(/,/, '.'));
+
+    let categoriaSelecionada = "";
+
     if (idPai === "selecao-prato") {
-        pratoSelecionado.prato = itemSelecionado
-        pratoSelecionado.preco = precoSelecionado
+        categoriaSelecionada = pedido.prato
     } else if (idPai === "selecao-bebida") {
-        bebidaSelecionada.prato = itemSelecionado
-        bebidaSelecionada.preco = precoSelecionado
+        categoriaSelecionada = pedido.bebida
     } else {
-        sobremesaSelecionada.prato = itemSelecionado
-        sobremesaSelecionada.preco = precoSelecionado
+        categoriaSelecionada = pedido.sobremesa
     }
+
+    categoriaSelecionada.item = itemSelecionado
+    categoriaSelecionada.preco = precoSelecionado
+
+    console.log(pedido) //debug
 
     elementoSelecionado.classList.add("selecionado");
     elementoSelecionado.querySelector(".check").classList.remove("escondido");
@@ -30,6 +35,7 @@ function selecionarOpcao(event) {
         }
     }
 }
+
 
 // lista com todas as opções clicáveis
 const listaOpcoes = document.querySelectorAll(".opcao");
