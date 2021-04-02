@@ -5,7 +5,7 @@ body{
     background-color: #EEEEEE;
     font-family: 'Roboto', sans-serif;
 }
-.box-topo{
+.caixa-topo{
     color: #fff;
     background-color: #CF2B2B;
     height: 92px;
@@ -23,11 +23,11 @@ body{
     margin: 2px 0px;
     letter-spacing: -0.6px;
 }
-.box-conteudo{
+.caixa-conteudo{
     max-width: 950px;
     margin: 123px auto 108px auto;
 }
-.box-conteudo > *{
+.caixa-conteudo > *{
     margin-left:  19px;
 }
 .categoria{
@@ -64,7 +64,7 @@ body{
     position: relative;
     cursor: pointer;
 }
-.box-img{
+.caixa-img{
     width: 144px;
     height: 87px;
     display: flex;
@@ -74,7 +74,7 @@ body{
     margin-bottom: 8px;
     overflow: hidden;
 }
-.box-img img{
+.caixa-img img{
     width: 100%;
     border-radius: 4px;
     margin-bottom: 8px;
@@ -114,7 +114,7 @@ body{
 .escondido{
     display: none;
 }
-.box-pedir{
+.caixa-pedir{
     position: fixed;
     bottom: 0;
     height: 92px;
@@ -130,13 +130,33 @@ button{
     border: none;
     width: 100%;
 }
-.pedir-desativado{
+#botao-pedir{
     font-size: 20px;
     margin: 0px 25px;
     height: 61px;
-    background: #CBCBCB;
     color: #FFFFFF;
+    transition: .5s;
+    max-width: 950px;
 }
+.pedir-desativado{
+    background: #CBCBCB;
+}
+.pedir-ativado{
+    background: #32B72F;
+    font-weight: bold;
+    cursor: pointer;
+}
+#overlay-fechar-pedido{
+    background: rgba(255, 255, 255, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transition: 1s;
+}
+
 @media (min-width: 520px) {
     .box-pedir br{
         display: none;
