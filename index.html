@@ -141,8 +141,24 @@
     <div class="caixa-pedir">
         <button class="pedir-desativado" id="botao-pedir">Selecione os 3 itens <br>para fechar o pedido</button>
     </div>
-    <div id="overlay-fechar-pedido" class="escondido transicao">
-
+    <div id="overlay-fechar-pedido">
+        <div id="caixa-confirmar-pedido">
+            <span>Confirme seu pedido</span>
+            <ul class="resumo">
+                <li><span>Bolinho de Aipim</span>34,99</li>
+                <li><span>Água mineral com gás</span>45,99</li>
+                <li><span>Salada de Frutas</span>9,99</li>
+                <li><span>TOTAL</span>R$ 89,80</li>
+            </ul>
+            <ul class="dados">
+                <li>Nome:</li>
+                <li><input type="text" placeholder="Digite seu nome"></li>
+                <li>Endereço:</li>
+                <li><input type="text" placeholder="Digite seu endereço completo"></li>
+            </ul>
+            <button class="botao-tudo-certo">Tudo certo, pode pedir!</button>
+            <button class="botao-cancelar">Cancelar</button>
+        </div>
     </div>
     <script src="js/scripts.js"></script>
 </body>
