@@ -8,6 +8,7 @@ const pedido = {
         return String(Total.toFixed(2)).replace(".", ',');
     }
 };
+const overlay = document.getElementById("overlay-fechar-pedido");
 
 function selecionarOpcao(event) {
 
@@ -58,7 +59,6 @@ function ativarBotaoPedido() {
 }
 
 function fecharPedido() {
-    const overlay = document.getElementById("overlay-fechar-pedido");
     overlay.style.display = "flex";
     overlay.querySelector(".resumo").innerHTML = `
     <li><span>${pedido.prato.item}</span>${pedido.prato.preco
@@ -68,6 +68,29 @@ function fecharPedido() {
     <li><span>${pedido.sobremesa.item}</span>${pedido.sobremesa.preco
         }</li >
     <li><span>TOTAL</span>R$  ${pedido.calcularTotal()}</li>`
+    const botaoTudoCerto = overlay.querySelector(".botao-tudo-certo");
+    const botaoCancelar = overlay.querySelector(".botao-cancelar");
+    botaoTudoCerto.addEventListener("click", tudoCerto);
+    botaoCancelar.addEventListener("click", cancelarPedido);
+}
+
+function cancelarPedido() {
+    overlay.style.display = "none";
+}
+function tudoCerto() {
+    pedido.nome = overlay.querySelector(".nome").value
+    pedido.endereco = overlay.querySelector(".endereco").value
+
+    let mensagem = `Olá, gostaria de fazer o pedido:
+- Prato: ${pedido.prato.item}
+- Bebida: ${pedido.bebida.item}
+- Sobremesa: ${pedido.sobremesa.item}
+Total: R$ ${pedido.calcularTotal()}\n
+Nome: ${pedido.nome}
+Endereço: ${pedido.endereco}`
+    mensagem = encodeURIComponent(mensagem)
+    whatsappUrl = "https://wa.me/5511999910621?text=" + mensagem;
+    window.open(whatsappUrl, '_blank');
 }
 
 // lista com todas as opções clicáveis

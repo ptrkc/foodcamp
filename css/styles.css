@@ -208,6 +208,7 @@ button{
     outline: 0px;
     border: none;
     color: rgb(114, 114, 114);
+    padding-left: 10px;
 }
 #caixa-confirmar-pedido button{
     font-size: 22px;
