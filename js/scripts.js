@@ -44,14 +44,14 @@ function selecionarOpcao(event) {
 
 function ativarBotaoPedido() {
     const botaoPedir = document.getElementById("botao-pedir");
-    botaoPedir.innerHTML = "Fechar pedido"
     botaoPedir.classList.replace('pedir-desativado', 'pedir-ativado');
     botaoPedir.addEventListener("click", fecharPedido);
+    botaoPedir.innerHTML = "Fechar pedido"
 }
 
 function fecharPedido() {
     const overlay = document.getElementById("overlay-fechar-pedido");
-    overlay.classList.remove("escondido");
+    overlay.style.display = "flex";
 }
 
 // lista com todas as opções clicáveis
