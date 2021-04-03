@@ -1,4 +1,13 @@
-const pedido = { prato: {}, bebida: {}, sobremesa: {}, endereco: "", calcularTotal: function () { return (this.prato.preco + this.bebida.preco + this.sobremesa.preco).toFixed(2) } };
+const pedido = {
+    prato: {},
+    bebida: {},
+    sobremesa: {},
+    endereco: "",
+    calcularTotal: function () {
+        const Total = Number(this.prato.preco.replace(",", '.')) + Number(this.bebida.preco.replace(",", '.')) + Number(this.sobremesa.preco.replace(",", '.'));
+        return String(Total.toFixed(2)).replace(".", ',');
+    }
+};
 
 function selecionarOpcao(event) {
 
@@ -7,8 +16,7 @@ function selecionarOpcao(event) {
     const elementoSelecionado = event.currentTarget;
     const idPai = elementoSelecionado.parentNode.id;
     const itemSelecionado = elementoSelecionado.querySelector(".item").innerHTML;
-    const precoNaoFormatado = elementoSelecionado.querySelector(".preco").innerHTML;
-    const precoSelecionado = parseFloat(precoNaoFormatado.slice(3).replace(/,/, '.'));
+    const precoSelecionado = elementoSelecionado.querySelector(".preco").innerHTML.slice(3);
 
     let categoriaSelecionada = "";
 
@@ -52,6 +60,14 @@ function ativarBotaoPedido() {
 function fecharPedido() {
     const overlay = document.getElementById("overlay-fechar-pedido");
     overlay.style.display = "flex";
+    overlay.querySelector(".resumo").innerHTML = `
+    <li><span>${pedido.prato.item}</span>${pedido.prato.preco
+        }</li >
+    <li><span>${pedido.bebida.item}</span>${pedido.bebida.preco
+        }</li >
+    <li><span>${pedido.sobremesa.item}</span>${pedido.sobremesa.preco
+        }</li >
+    <li><span>TOTAL</span>R$  ${pedido.calcularTotal()}</li>`
 }
 
 // lista com todas as opções clicáveis
