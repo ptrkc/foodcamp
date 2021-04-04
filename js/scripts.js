@@ -55,42 +55,41 @@ function ativarBotaoPedido() {
     const botaoPedir = document.getElementById("botao-pedir");
     botaoPedir.classList.replace('pedir-desativado', 'pedir-ativado');
     botaoPedir.addEventListener("click", fecharPedido);
-    botaoPedir.innerHTML = "Fechar pedido"
+    botaoPedir.innerText = "Fechar pedido"
 }
 
 function fecharPedido() {
     overlay.style.display = "flex";
     overlay.querySelector(".resumo").innerHTML = `
-    <li><span>${pedido.prato.item}</span>${pedido.prato.preco
-        }</li >
-    <li><span>${pedido.bebida.item}</span>${pedido.bebida.preco
-        }</li >
-    <li><span>${pedido.sobremesa.item}</span>${pedido.sobremesa.preco
-        }</li >
+    <li><span>${pedido.prato.item}</span>${pedido.prato.preco}</li >
+    <li><span>${pedido.bebida.item}</span>${pedido.bebida.preco}</li >
+    <li><span>${pedido.sobremesa.item}</span>${pedido.sobremesa.preco}</li >
     <li><span>TOTAL</span>R$  ${pedido.calcularTotal()}</li>`
     const botaoTudoCerto = overlay.querySelector(".botao-tudo-certo");
     const botaoCancelar = overlay.querySelector(".botao-cancelar");
     botaoTudoCerto.addEventListener("click", tudoCerto);
     botaoCancelar.addEventListener("click", cancelarPedido);
 }
-
 function cancelarPedido() {
     overlay.style.display = "none";
 }
 function tudoCerto() {
     pedido.nome = overlay.querySelector(".nome").value
     pedido.endereco = overlay.querySelector(".endereco").value
-
-    let mensagem = `Olá, gostaria de fazer o pedido:
+    if (pedido.nome !== "" && pedido.endereco !== "") {
+        let mensagem = `Olá, gostaria de fazer o pedido:
 - Prato: ${pedido.prato.item}
 - Bebida: ${pedido.bebida.item}
 - Sobremesa: ${pedido.sobremesa.item}
 Total: R$ ${pedido.calcularTotal()}\n
 Nome: ${pedido.nome}
 Endereço: ${pedido.endereco}`
-    mensagem = encodeURIComponent(mensagem)
-    whatsappUrl = "https://wa.me/5511999910621?text=" + mensagem;
-    window.open(whatsappUrl, '_blank');
+        mensagem = encodeURIComponent(mensagem)
+        whatsappUrl = "https://wa.me/5511999910621?text=" + mensagem;
+        window.open(whatsappUrl, '_blank');
+    } else {
+        overlay.querySelector(".erro").classList.remove("escondido");
+    }
 }
 
 // lista com todas as opções clicáveis

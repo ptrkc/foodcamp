@@ -210,6 +210,12 @@ button{
     color: rgb(114, 114, 114);
     padding-left: 10px;
 }
+.erro{
+    color: rgb(204, 0, 0);
+    font-size: 13px;
+    background-color: rgb(255, 235, 124);
+    border: 2px solid rgb(255, 235, 124);
+}
 #caixa-confirmar-pedido button{
     font-size: 22px;
     height: 52px;
