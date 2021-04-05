@@ -42,6 +42,24 @@ function selecionarOpcao(event) {
         ativarBotaoPedido();
     }
 }
+function scrollar(event) {
+    const setaClicada = event.currentTarget
+    const idPai = setaClicada.parentNode.id;
+    const categoria = document.getElementById(idPai)
+    if (setaClicada.classList.contains("direita")) {
+        categoria.scrollBy({
+            top: 0,
+            left: +(window.innerWidth - 20),
+            behavior: 'smooth'
+        })
+    } else {
+        categoria.scrollBy({
+            top: 0,
+            left: -(window.innerWidth - 20),
+            behavior: 'smooth'
+        })
+    }
+}
 function ativarBotaoPedido() {
     const botaoPedir = document.getElementById("botao-pedir");
     botaoPedir.classList.replace('pedir-desativado', 'pedir-ativado');
@@ -85,11 +103,14 @@ Total: R$ ${pedido.calcularTotal()}\n
 Nome: ${pedido.nome}
 Endereço: ${pedido.endereco}`
         mensagem = encodeURIComponent(mensagem)
-        whatsappUrl = "https://wa.me/5511999910621?text=" + mensagem;
-        window.open(whatsappUrl, '_blank');
+        const whatsNum = "NTUyMTk4NTUyMDc2NA=="
+        let whatsUrl = "https://wa.me/" + atob(whatsNum) + "?text=" + mensagem;
+        window.open(whatsUrl, '_blank');
     } else {
         overlay.querySelector(".erro").classList.remove("escondido");
     }
 }
 const listaOpcoes = document.querySelectorAll(".opcao");
 listaOpcoes.forEach(opcao => opcao.addEventListener("click", selecionarOpcao));
+const listaScroll = document.querySelectorAll(".seta");
+listaScroll.forEach(opcao => opcao.addEventListener("click", scrollar));
