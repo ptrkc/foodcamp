@@ -8,56 +8,44 @@ const pedido = {
         return String(Total.toFixed(2)).replace(".", ',');
     }
 };
+const elementosSelecionados = { prato: "", bebida: "", sobremesa: "" }
 const overlay = document.getElementById("overlay-fechar-pedido");
-
+let elementoSelecionado = "";
 function selecionarOpcao(event) {
-
     console.clear() //debug
-
-    const elementoSelecionado = event.currentTarget;
-    const idPai = elementoSelecionado.parentNode.id;
-    const itemSelecionado = elementoSelecionado.querySelector(".item").innerHTML;
-    const precoSelecionado = elementoSelecionado.querySelector(".preco").innerHTML.slice(3);
-
-    let categoriaSelecionada = "";
-
+    const elementoClicado = event.currentTarget;
+    const idPai = elementoClicado.parentNode.id;
+    let categoria = ""
     if (idPai === "selecao-prato") {
-        categoriaSelecionada = pedido.prato;
+        categoria = "prato"
     } else if (idPai === "selecao-bebida") {
-        categoriaSelecionada = pedido.bebida;
+        categoria = "bebida"
     } else {
-        categoriaSelecionada = pedido.sobremesa;
+        categoria = "sobremesa"
     }
-
-    categoriaSelecionada.item = itemSelecionado
-    categoriaSelecionada.preco = precoSelecionado
-
-    console.log(pedido) //debug
-
-    elementoSelecionado.classList.add("selecionado");
-    elementoSelecionado.querySelector(".check").classList.remove("escondido");
-    const outrasOpcoes = document.getElementById(idPai).querySelectorAll(".opcao");
-    for (let i = 0; i < outrasOpcoes.length; i++) {
-        if (outrasOpcoes[i] !== elementoSelecionado) {
-            outrasOpcoes[i].classList.remove("selecionado");
-            outrasOpcoes[i].querySelector(".check").classList.add("escondido");
+    if (elementoClicado !== elementosSelecionados[categoria]) {
+        pedido[categoria].item = elementoClicado.querySelector(".item").innerHTML;
+        pedido[categoria].preco = elementoClicado.querySelector(".preco").innerHTML.slice(3);
+        elementoClicado.classList.add("selecionado");
+        elementoClicado.querySelector(".check").classList.remove("escondido");
+        if (elementosSelecionados[categoria] !== "") {
+            elementosSelecionados[categoria].classList.remove("selecionado");
+            elementosSelecionados[categoria].querySelector(".check").classList.add("escondido");
         }
+        elementosSelecionados[categoria] = elementoClicado
     }
-
     if (pedido.prato.item !== undefined &&
         pedido.bebida.item !== undefined &&
         pedido.sobremesa.item !== undefined) {
         ativarBotaoPedido();
     }
 }
-
 function ativarBotaoPedido() {
     const botaoPedir = document.getElementById("botao-pedir");
     botaoPedir.classList.replace('pedir-desativado', 'pedir-ativado');
     botaoPedir.addEventListener("click", fecharPedido);
-    botaoPedir.innerText = "Fechar pedido"
+    botaoPedir.textContent = "Fechar pedido"
 }
-
 function fecharPedido() {
     overlay.style.display = "flex";
     overlay.querySelector(".resumo").innerHTML = `
@@ -72,6 +60,7 @@ function fecharPedido() {
 }
 function cancelarPedido() {
     overlay.style.display = "none";
+    overlay.querySelector(".erro").classList.add("escondido");
 }
 function tudoCerto() {
     pedido.nome = overlay.querySelector(".nome").value
@@ -91,9 +80,5 @@ Endereço: ${pedido.endereco}`
         overlay.querySelector(".erro").classList.remove("escondido");
     }
 }
-
-// lista com todas as opções clicáveis
 const listaOpcoes = document.querySelectorAll(".opcao");
-for (let i = 0; i < listaOpcoes.length; i++) {
-    listaOpcoes[i].addEventListener("click", selecionarOpcao);
-}
+listaOpcoes.forEach(opcao => opcao.addEventListener("click", selecionarOpcao));
