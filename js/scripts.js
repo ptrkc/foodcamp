@@ -10,6 +10,8 @@ const pedido = {
 };
 const elementosSelecionados = { prato: "", bebida: "", sobremesa: "" }
 const overlay = document.getElementById("overlay-fechar-pedido");
+const inputNome = overlay.querySelector(".nome")
+const inputEndereco = overlay.querySelector(".endereco")
 let elementoSelecionado = "";
 function selecionarOpcao(event) {
     console.clear() //debug
@@ -57,14 +59,23 @@ function fecharPedido() {
     const botaoCancelar = overlay.querySelector(".botao-cancelar");
     botaoTudoCerto.addEventListener("click", tudoCerto);
     botaoCancelar.addEventListener("click", cancelarPedido);
+    inputNome.addEventListener("keyup", detectarEnter)
+    inputEndereco.addEventListener("keyup", detectarEnter)
+}
+function detectarEnter(event) {
+    if (event.keyCode === 13) {
+        tudoCerto()
+    }
 }
 function cancelarPedido() {
     overlay.style.display = "none";
     overlay.querySelector(".erro").classList.add("escondido");
+    inputNome.removeEventListener("keyup", detectarEnter)
+    inputEndereco.removeEventListener("keyup", detectarEnter)
 }
 function tudoCerto() {
-    pedido.nome = overlay.querySelector(".nome").value
-    pedido.endereco = overlay.querySelector(".endereco").value
+    pedido.nome = inputNome.value
+    pedido.endereco = inputEndereco.value
     if (pedido.nome !== "" && pedido.endereco !== "") {
         let mensagem = `Olá, gostaria de fazer o pedido:
 - Prato: ${pedido.prato.item}

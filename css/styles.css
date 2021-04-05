@@ -203,7 +203,7 @@ button{
     width: 100%;
     height: 30px;
     font-size: 20px;
-    border-radius: 3px;
+    border-radius: 9px;
     display: inline;
     outline: 0px;
     border: none;
@@ -232,7 +232,7 @@ button{
     background: #50D074;
 }
 @media (min-width: 520px) {
-    .box-pedir br{
+    .caixa-pedir br{
         display: none;
     }
 }
