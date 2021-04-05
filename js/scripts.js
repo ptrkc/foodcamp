@@ -12,18 +12,19 @@ const elementosSelecionados = { prato: "", bebida: "", sobremesa: "" }
 const overlay = document.getElementById("overlay-fechar-pedido");
 const inputNome = overlay.querySelector(".nome")
 const inputEndereco = overlay.querySelector(".endereco")
-let elementoSelecionado = "";
+const listaOpcoes = document.querySelectorAll(".opcao");
+const listaScroll = document.querySelectorAll(".seta");
+comecar();
 function selecionarOpcao(event) {
-    console.clear() //debug
     const elementoClicado = event.currentTarget;
     const idPai = elementoClicado.parentNode.id;
-    let categoria = ""
+    let categoria = "";
     if (idPai === "selecao-prato") {
-        categoria = "prato"
+        categoria = "prato";
     } else if (idPai === "selecao-bebida") {
-        categoria = "bebida"
+        categoria = "bebida";
     } else {
-        categoria = "sobremesa"
+        categoria = "sobremesa";
     }
     if (elementoClicado !== elementosSelecionados[categoria]) {
         pedido[categoria].item = elementoClicado.querySelector(".item").innerHTML;
@@ -34,7 +35,7 @@ function selecionarOpcao(event) {
             elementosSelecionados[categoria].classList.remove("selecionado");
             elementosSelecionados[categoria].querySelector(".check").classList.add("escondido");
         }
-        elementosSelecionados[categoria] = elementoClicado
+        elementosSelecionados[categoria] = elementoClicado;
     }
     if (pedido.prato.item !== undefined &&
         pedido.bebida.item !== undefined &&
@@ -43,9 +44,9 @@ function selecionarOpcao(event) {
     }
 }
 function scrollar(event) {
-    const setaClicada = event.currentTarget
+    const setaClicada = event.currentTarget;
     const idPai = setaClicada.parentNode.id;
-    const categoria = document.getElementById(idPai)
+    const categoria = document.getElementById(idPai);
     if (setaClicada.classList.contains("direita")) {
         categoria.scrollBy({
             top: 0,
@@ -64,7 +65,7 @@ function ativarBotaoPedido() {
     const botaoPedir = document.getElementById("botao-pedir");
     botaoPedir.classList.replace('pedir-desativado', 'pedir-ativado');
     botaoPedir.addEventListener("click", fecharPedido);
-    botaoPedir.textContent = "Fechar pedido"
+    botaoPedir.textContent = "Fechar pedido";
 }
 function fecharPedido() {
     overlay.style.display = "flex";
@@ -72,28 +73,28 @@ function fecharPedido() {
     <li><span>${pedido.prato.item}</span>${pedido.prato.preco}</li >
     <li><span>${pedido.bebida.item}</span>${pedido.bebida.preco}</li >
     <li><span>${pedido.sobremesa.item}</span>${pedido.sobremesa.preco}</li >
-    <li><span>TOTAL</span>R$  ${pedido.calcularTotal()}</li>`
+    <li><span>TOTAL</span>R$  ${pedido.calcularTotal()}</li>`;
     const botaoTudoCerto = overlay.querySelector(".botao-tudo-certo");
     const botaoCancelar = overlay.querySelector(".botao-cancelar");
     botaoTudoCerto.addEventListener("click", tudoCerto);
     botaoCancelar.addEventListener("click", cancelarPedido);
-    inputNome.addEventListener("keyup", detectarEnter)
-    inputEndereco.addEventListener("keyup", detectarEnter)
+    inputNome.addEventListener("keyup", detectarEnter);
+    inputEndereco.addEventListener("keyup", detectarEnter);
 }
 function detectarEnter(event) {
     if (event.keyCode === 13) {
-        tudoCerto()
+        tudoCerto();
     }
 }
 function cancelarPedido() {
     overlay.style.display = "none";
     overlay.querySelector(".erro").classList.add("escondido");
-    inputNome.removeEventListener("keyup", detectarEnter)
-    inputEndereco.removeEventListener("keyup", detectarEnter)
+    inputNome.removeEventListener("keyup", detectarEnter);
+    inputEndereco.removeEventListener("keyup", detectarEnter);
 }
 function tudoCerto() {
-    pedido.nome = inputNome.value
-    pedido.endereco = inputEndereco.value
+    pedido.nome = inputNome.value;
+    pedido.endereco = inputEndereco.value;
     if (pedido.nome !== "" && pedido.endereco !== "") {
         let mensagem = `Olá, gostaria de fazer o pedido:
 - Prato: ${pedido.prato.item}
@@ -110,7 +111,13 @@ Endereço: ${pedido.endereco}`
         overlay.querySelector(".erro").classList.remove("escondido");
     }
 }
-const listaOpcoes = document.querySelectorAll(".opcao");
-listaOpcoes.forEach(opcao => opcao.addEventListener("click", selecionarOpcao));
-const listaScroll = document.querySelectorAll(".seta");
-listaScroll.forEach(opcao => opcao.addEventListener("click", scrollar));
+function comecar() {
+    listaOpcoes.forEach(opcao => opcao.addEventListener("click", selecionarOpcao));
+    listaScroll.forEach(seta => seta.addEventListener("click", scrollar));
+    if (matchMedia('(pointer:coarse)').matches !== true) {
+        listaOpcoes.forEach(opcao => opcao.classList.add("hover-desktop"));
+        listaScroll.forEach(seta => seta.classList.add("hover-desktop"));
+        const listaBotoes = document.querySelectorAll("button");
+        listaScroll.forEach(botao => botao.classList.add("hover-desktop"));
+    }
+}

@@ -67,10 +67,6 @@ body{
     position: relative;
     
 }
-.opcao:hover{
-    filter: brightness(.95);
-    cursor: pointer;
-}
 .caixa-img{
     width: 144px;
     height: 87px;
@@ -134,10 +130,6 @@ body{
     box-shadow: 0px 0px 5px 1px rgb(146, 146, 146);
     z-index: 1;
 }
-.seta:hover{
-    filter: brightness(.95);
-    cursor: pointer;
-}
 .direita{
     background-image: url(../img/chevron-right.svg);
     right: -5px;
@@ -164,10 +156,9 @@ button{
     border: none;
     width: 100%;
 }
-button:hover{
-    filter: brightness(.95);
-    cursor: pointer;
-}
+button:focus{
+    outline: none;
+ }
 #botao-pedir{
     font-size: 20px;
     margin: 0px 25px;
@@ -270,10 +261,10 @@ button:hover{
     font-size: 20px;
     background: #50D074;
 }
-@media (min-width: 520px) {
-    .caixa-pedir br{
-        display: none;
-    }
+
+.hover-desktop:hover{
+    filter: brightness(.95);
+    cursor: pointer
 }
 @media (min-width:964px){
     .seta{
@@ -283,11 +274,8 @@ button:hover{
         padding-left: 20px;
     }
 }
-@media (hover: none) {
-    .opcao:hover,
-    .seta:hover,
-    button:hover{
-        filter: brightness(1);
-        cursor:default
+@media (min-width: 520px) {
+    .caixa-pedir br{
+        display: none;
     }
 }
