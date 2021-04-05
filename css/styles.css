@@ -25,7 +25,7 @@ body{
     letter-spacing: -0.6px;
 }
 .caixa-conteudo{
-    max-width: 950px;
+    max-width: 970px;
     margin: 123px auto 108px auto;
 }
 .caixa-conteudo > *{
@@ -123,10 +123,7 @@ body{
 }
 .seta{
     position: sticky ;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: calc(50% - 20px);
+    top: 90px;
     min-width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -276,6 +273,14 @@ button:hover{
 @media (min-width: 520px) {
     .caixa-pedir br{
         display: none;
+    }
+}
+@media (min-width:964px){
+    .seta{
+        display: none;
+    }
+    .opcoes{
+        padding-left: 20px;
     }
 }
 @media (hover: none) {
